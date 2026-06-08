@@ -4,7 +4,7 @@ const protect = require('../middleware/authMiddleware')
 const authorize = require('../middleware/roleMiddleware')
 
 
-console.log('About to require authController...')
+// console.log('About to require authController...')
 const authCtrl = require('../controllers/authController')
 // console.log('authCtrl:', authCtrl)
 

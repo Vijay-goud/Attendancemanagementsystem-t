@@ -12,18 +12,35 @@ connectDB()
 
 const app = express()
 
-app.use(cors({
-  origin: [
+// app.options('(.*)', cors())
+
+const corsOptions = {
+   origin: [
     "http://localhost:3000",
-    "https://attendancemanagementsystem-frontend-one.vercel.app/"
+    
+    "https://attendancemanagementsystem-frontend-one.vercel.app"  // no trailing slash
   ],
-  credentials:true
-}))
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+
+// app.use(cors({
+//   origin: [
+//     "http://localhost:3000",
+//     "https://attendancemanagementsystem-frontend-one.vercel.app"  // no trailing slash
+//   ],
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }))
 
 // app.use(cors({
 //   origin: "http://localhost:3000",
 //   credentials:true
 // }))
+
+app.use(cors(corsOptions))
 
 app.use(express.json())
 app.use('/api/auth', authRoutes)
@@ -39,3 +56,4 @@ app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`)
   console.log(`API Endpoint: http://localhost:${PORT}/`)
 })
+
